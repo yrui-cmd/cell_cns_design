@@ -18,7 +18,7 @@ python -m pip install -r (Join-Path $skillRoot 'cell_cns_design/scripts/requirem
 
 ## 使用
 
-在 Codex 中调用 `$cell_cns_design`，提供科研文字，按提示配置个人登录号并确认费用即可。
+在 Codex 中调用 `$cell_cns_design`，提供科研文字，自动检测本地已保存的 API Key，缺失时再配置，确认费用即可。
 
 [详细命令](references/client.md) · [网页入口](https://xiaomiao-ai.com/cell_figure_ds)
 
