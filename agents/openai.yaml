@@ -1,0 +1,4 @@
+interface:
+  display_name: "cell_cns_design"
+  short_description: "10额度提交科研文字，后台接收PNG并唤醒原聊天自动展示"
+  default_prompt: "使用 $cell_cns_design 提交科研文字，结果返回后在本聊天展示PNG。"
