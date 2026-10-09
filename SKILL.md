@@ -17,7 +17,11 @@ description: 将科研文字提交到 Cell Figure DS 的10额度接口，独立P
 
 读取[客户端命令](references/client.md)。保存文字为UTF-8，确定独立job-dir，核对10额度授权。运行probe确认桌面原聊天可达，balance读取实时可用额度；submit先保存request_id、原文哈希及账户身份，再提交并启动独立Python等待。
 
-收到 `charged_credits=10` 与 `background_waiter_verified=true` 后，只提示“已提交，结果返回后自动继续。”并结束本轮。结果不明时保留原目录、原request_id，不能另建订单再次收费。独立 Python 无窗口进程负责等待；恢复监控使用 pythonw.exe 常驻，每30秒在同一进程内检查已有订单，Windows登录时自动启动。不反复启动 PowerShell、CMD 或控制台窗口，不创建Codex定时任务。
+收到 `charged_credits=10` 与 `background_waiter_verified=true` 后，脚本自动在原聊天右侧打开进度条；返回 `progress_opened=true` 时不要重复打开。只提示“已提交，结果返回后自动继续。”并结束本轮。结果不明时保留原目录、原request_id，不能另建订单再次收费。独立 Python 无窗口进程负责等待；恢复监控使用 pythonw.exe 常驻，每30秒在同一进程内检查已有订单，Windows登录时自动启动。不反复启动 PowerShell、CMD 或控制台窗口，不创建Codex定时任务。
+
+## 10 分钟进度条
+
+进度条按 **10 分钟预估**推进至99%，不是服务器真实完成比例或交付时限。超过10分钟保持99%并继续等待，提前收到也可立即完成；只有返回PNG已下载、完整解码并核对哈希后才显示100%。暂停、异常和本地断连如实显示。面板仅查看本地状态，不额外提交订单、查询额度或调用模型，不影响原有后台接收与唤醒。面板关闭或打开失败时，在原聊天执行 `client.py progress --job-dir <原任务目录>` 恢复；不能为恢复进度条重新付费提交。
 
 ## 结果返回
 

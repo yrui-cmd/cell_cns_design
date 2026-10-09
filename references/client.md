@@ -14,6 +14,8 @@ python -X utf8 ./scripts/client.py submit --text-file '<原文路径>' --job-dir
 
 后台命令：`status --job-dir ...`、`stop --job-dir ...`、`resume --job-dir ...`、`acknowledge --job-dir ... --nonce ...`、`complete --job-dir ... --visual-checked`。所有路径需用实际值替换。
 
+提交后自动在原聊天右侧打开10分钟预估进度条；`progress_opened=true` 表示面板已打开，无需重复操作。手动恢复使用 `progress --job-dir <原任务目录>`，仅原聊天可执行。超时停在99%继续等待，只有本地PNG通过解码与哈希校验才到100%；进度面板失败不影响后台接收，不需要重新收费提交。
+
 resume必须从原聊天运行。已有PNG会返回 `deliver_existing_png`，直接展示完成；未收到则继续查询原订单。`wake_uncertain`需要先核实原聊天回执再acknowledge，不自动重复发送。配置错误修复后沿用原目录恢复，不能换客户身份。
 
 保存：原文requirements.txt、持久状态job.json、收到的result.png与日志均在job-dir。客户端保留最终PNG；后台核对SHA256和完整解码后才发送原聊天通知。
