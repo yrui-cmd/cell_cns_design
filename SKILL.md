@@ -17,7 +17,7 @@ description: 将科研文字提交到 Cell Figure DS 的10额度接口，独立P
 
 读取[客户端命令](references/client.md)。保存文字为UTF-8，确定独立job-dir，核对10额度授权。运行probe确认桌面原聊天可达，balance读取实时可用额度；submit先保存request_id、原文哈希及账户身份，再提交并启动独立Python等待。
 
-收到 `charged_credits=10` 与 `background_waiter_verified=true` 后，只提示“已提交，结果返回后自动继续。”并结束本轮。结果不明时保留原目录、原request_id，不能另建订单再次收费。独立进程与Windows登录恢复负责等待，不创建Codex定时任务。
+收到 `charged_credits=10` 与 `background_waiter_verified=true` 后，只提示“已提交，结果返回后自动继续。”并结束本轮。结果不明时保留原目录、原request_id，不能另建订单再次收费。独立 Python 无窗口进程负责等待；恢复监控使用 pythonw.exe 常驻，每30秒在同一进程内检查已有订单，Windows登录时自动启动。不反复启动 PowerShell、CMD 或控制台窗口，不创建Codex定时任务。
 
 ## 结果返回
 

@@ -19,3 +19,5 @@ resume必须从原聊天运行。已有PNG会返回 `deliver_existing_png`，直
 保存：原文requirements.txt、持久状态job.json、收到的result.png与日志均在job-dir。客户端保留最终PNG；后台核对SHA256和完整解码后才发送原聊天通知。
 
 自动检测：`python -X utf8 ./scripts/client.py discover-key`。返回可用凭据路径，不输出密钥、不查询余额。顺序为显式路径、本分支DPAPI文件、实际桌面xiaomiao_api.txt、其他已知绘图分支同一客户Key。已选择的文件无效时停止，不切换账户。提交前传同一路径执行balance实时校验；恢复已有任务继续使用其job.json记录的路径。
+
+无窗口监控：Windows Python 安装必须包含同目录的 pythonw.exe。首次提交会自动安装并启动；更新旧版后可先运行 `setup-waiter` 替换原来的每分钟 PowerShell 恢复任务，无需创建新订单。登录时启动常驻 Python，每30秒检查已有订单；重复安装不会重复监控，也不打断正在等待的任务。监控心跳写入当前用户 LocalAppData/CellFigureDsClient/recovery-monitor.json。
